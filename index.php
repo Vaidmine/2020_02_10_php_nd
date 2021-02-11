@@ -32,9 +32,9 @@ $actorsurname = 'Pitt';
 echo "<br>";
 echo "Aktoriaus vardas ".$actorname.$actorsurname;
 echo "<br>";
-echo "Spausdinu:"."<br>";
+echo "Spausdinu: ";
 echo strtoupper($actorname);
-echo "<br>";
+echo " ";
 echo strtolower($actorsurname);
 ?> 
 
@@ -51,6 +51,9 @@ echo "Aktoriaus vardas ".$actorname1." ".$actorsurname1;
 echo "<br>";
 $actorinitials = $actorname1[0].".".$actorsurname1[0].".";
 echo "Aktoriaus inicialai ".$actorinitials;
+
+// dar yra budas su filtru substr (sub string)
+
 ?> 
 
 <h4> ***** ND 4 ****** </h4>
@@ -77,9 +80,10 @@ echo "Paskutines 3 raides yra: ".$lastthreeletters;
 $sakinys = 'An American in Paris';
 echo "Sakinys: ".$sakinys;
 echo "<br>";
-$kakeiciam = array("a", "A");
+$kakeiciam = ["a", "A"]; // array["a", "A"] 
 $ikakeiciam = "*";
 echo "Pakeitimas: ".(str_replace($kakeiciam,$ikakeiciam,$sakinys));
+
  
 ?> 
 
@@ -127,6 +131,8 @@ echo "<br>";
 $priebalses3 = str_replace($balses, "", $filmas3);
 echo "filmas 3 priebalses: ".$priebalses3;
 echo "<br>";
+
+// galima daryti su str_ireplace, kuris not caps sensitive
 ?> 
 
 <h4> ***** ND 8 ****** </h4>
@@ -138,13 +144,18 @@ $starwars = 'Star Wars: Episode '.str_repeat(' ', rand(0,5)). rand(1,9) . ' - A 
 echo "filmas: ".$starwars;
 echo "<br>";
 echo "epizodo numeris: ";
-$epizodonumeris = " ";
-for ($i=0; $i < strlen($starwars) ; $i++) { 
-    if(is_numeric($starwars[$i])){
-        $epizodonumeris = $starwars[$i];
-    }
-}
-echo $epizodonumeris;
+// $epizodonumeris = " ";
+// for ($i=0; $i < strlen($starwars) ; $i++) { 
+//     if(is_numeric($starwars[$i])){
+//         $epizodonumeris = $starwars[$i];
+//     }
+// }
+// echo $epizodonumeris;
+
+echo filter_var($starwars, FILTER_SANITIZE_NUMBER_INT); 
+// spec.filter removes all illegal characters from a number.
+// galima daryti su preg_match / regex
+// galima daryti su trim
 ?> 
 
 
@@ -166,10 +177,10 @@ echo "<br>";
 //iš lotyniškų mažųjų raidžių. 
 //Stringo ilgis 3 simboliai.
 $visosLotRaides = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-$ilgis = strlen($visosLotRaides);
+$stringoilgis = strlen($visosLotRaides);
 $trysRaides = " ";
 for( $i = 0; $i < 3 ; $i++) {  
-    $trysRaides .= ($visosLotRaides[ rand( 0, $ilgis - 1 ) ]);   
+    $trysRaides .= ($visosLotRaides[ rand( 0, $stringoilgis - 1 ) ]);   
     }
 echo $trysRaides;
  
