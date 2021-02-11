@@ -166,8 +166,37 @@ echo filter_var($starwars, FILTER_SANITIZE_NUMBER_INT);
 //yra žodžių trumpesnių arba lygių nei 5 raidės.
 // Pakartokite kodą su stringu 
 //“Tik nereikia gąsdinti Pietų Centro, geriant sultis pas save kvartale”.
- 
+//
+// P.s. Lietuvisku raidziu ilgis kitoks(uzima daugiau, nei lotyniskos)
+// vietoje mb_ dirba su MULTIBITE simboliais (liet, kinietiskais ir ect egzotika), 
+// t.y.funkcija tampa multibaitine
+$filmas10 = "Don't Be a Menace to South Central While Drinking Your Juice in the Hood";
+$filmas20 = "Tik nereikia gąsdinti Pietų Centro geriant sultis pas save kvartale";
+echo "filmas: ".$filmas10;
 echo "<br>";
+echo "filmas: ".$filmas20;
+echo "<br>";
+$filmas10Split = explode(' ', $filmas10);
+$filmas20Split = explode(' ', $filmas20);
+$filmas10Count = 0;
+$filmas20Count = 0;
+
+foreach ($filmas10Split as $split){
+    if (mb_strlen($split) <= 5 ){
+        $filmas10Count++;
+    }
+}
+foreach ($filmas20Split as $split){
+    if (mb_strlen($split) <= 5 ){
+        $filmas20Count++;
+    }
+}
+echo "zodziai trumpesni arba lygus 5 simboliams: ".$filmas10Count;
+echo "<br>";
+echo "zodziai trumpesni arba lygus 5 simboliams: ".$filmas20Count;
+echo "<br>";
+
+ 
  
 ?> 
 
@@ -177,13 +206,32 @@ echo "<br>";
 //iš lotyniškų mažųjų raidžių. 
 //Stringo ilgis 3 simboliai.
 $visosLotRaides = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-$stringoilgis = strlen($visosLotRaides);
-$trysRaides = " ";
-for( $i = 0; $i < 3 ; $i++) {  
-    $trysRaides .= ($visosLotRaides[ rand( 0, $stringoilgis - 1 ) ]);   
-    }
+echo $visosLotRaides;
+echo '<br>';
+$pirmaRaide = $visosLotRaides[rand(0,50)];
+$antraRaide = $visosLotRaides[rand(0,50)];
+$treciaRaide = $visosLotRaides[rand(0,50)];
+
+$trysRaides = $pirmaRaide.$antraRaide.$treciaRaide;
+echo " 3 atsitiktines raides - vienas budas: ";
 echo $trysRaides;
+
+// kitas budas:
+// $stringoilgis = strlen($visosLotRaides);
+// $trysRaides = " ";
+// for( $i = 0; $i < 3 ; $i++) {  
+//     $trysRaides .= ($visosLotRaides[ rand( 0, $stringoilgis - 1 ) ]);   
+//     }
+// echo $trysRaides;
+
+// dar vienas budas:
+echo '<br>';
+echo " 3 atsitiktines raides - kitas budas: ";
  
+$sumaisytosRaides = str_shuffle($visosLotRaides);
+echo substr($sumaisytosRaides, -3);
+ 
+///
 echo "<br>";
  
 ?> 
